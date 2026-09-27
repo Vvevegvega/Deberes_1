@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Get vs Post</title>
+  </head>
+
+  <body>
+    <form action="./ejercicio2" method="POST">
+        <input
+              type="number"
+              id="firstNumber"
+              name="firstNumber"
+              class="form-control"
+            />
+        <input
+            type="submit"
+            value="Peticion POST"
+        />
+    </form>
+
+    <form action="./ejercicio2.php" method="GET">
+        <input
+            type="number"
+            id="firstNumber"
+            name="firstNumber"
+            class="form-control"
+        />
+        <input
+            type="submit"
+            value="Peticion GET"
+        />
+    </form>
+
+  </body>
+</html>
+
