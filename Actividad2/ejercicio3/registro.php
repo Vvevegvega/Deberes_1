@@ -1,19 +1,60 @@
 <?php
-
-    $arrayAsociativo;
+    if(!isset($arrayAsociativo)){
+        $arrayAsociativo = [];
+    }
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if(true){
-            $arrayAsociativo[] =  
-            array => (
+        if(isValidInput()){
+            global $arrayAsociativo; 
+            array_push($arrayAsociativo,   
+            array(
                 'nombreCompleto' => $_POST['nombreCompleto'],
                 'edad' => $_POST['edad'],
                 'email' => $_POST['email'],
-                'modulos' => $_POST['modulos'] 
-            );
+                'modulo' => $_POST['modulo'] 
+            ));
+            print_r($arrayAsociativo);
         }else{
-
         }
+    }
+
+    function isValidInput():bool{
+        $result = true;
+        
+        if(filter_input(INPUT_POST, 
+            'nombreCompleto', 
+            FILTER_SANITIZE_SPECIAL_CHARS)){
+            //Do something    
+
+            $result = false;
+        }
+
+        if(filter_input(INPUT_POST, 
+            'edad', 
+            FILTER_SANITIZE_NUMBER_INT)){
+            //Do something    
+            
+            $result = false;
+        }
+
+        if(filter_input(INPUT_POST, 
+            'email', 
+            FILTER_SANITIZE_EMAIL)){
+            //Do something    
+            
+            $result = false;
+        }
+
+        if(filter_input(INPUT_POST, 
+            'modulo', 
+            FILTER_SANITIZE_EMAIL)){
+            //Do something, puedo comprobar la lista de modulos de alguna manera?
+            
+            $result = false;
+        }
+
+        //Lo hago asi para, que pueda poner los warnings especificos en cada uno de los campos
+        return $result;
     }
 ?>
 

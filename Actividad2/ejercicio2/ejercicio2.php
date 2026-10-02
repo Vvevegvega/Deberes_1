@@ -1,5 +1,4 @@
 <?php
-    require("../ejercicio1/funciones.php");
     $alumnos = array(
         "Martin" => 7,
         "Carmen" => 8,
