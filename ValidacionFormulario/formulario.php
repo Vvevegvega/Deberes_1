@@ -9,24 +9,29 @@
     $nameErr = "";
 
     $Err ="Los campos con astericos deben ser rellenados";
+    $hayError = false;
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         //Validar nombre REQUERIDO
 
         if (empty($_POST["nombre"])) {
             $nameErr = "El nombre es obligatorio";
+            $hayError = true;
         } else {
             if (!preg_match("/^[a-zA-Z ]*$/",$_POST["nombre"])) {
                 $nameErr = "Únicamente se permiten letras y espacios";
+                $hayError = true;
             }
         }
 
         //Validar email REQUERIDO
         if (empty($_POST["email"])) {
             $emailErr = "El email es obligatorio";
+            $hayError = true;
         } else {
             if(!validar_email($_POST["email"])){
-            $emailErr = "Email invalido";
+                $emailErr = "Email invalido";
+                $hayError = true;
             }
         }
 
@@ -34,12 +39,14 @@
         if (!empty($_POST["website"])) {
             if(!validar_url($_POST["email"])){
                 $websiteErr ="URL invalida";
+                $hayError = true;
             }
         }
 
         //validar genero REQUERIDO
         if(empty($_POST["sexo"])){
             $sexoErr = "Debe seleccionar sexo";
+            $hayError = true;
         }
     }
 
@@ -60,7 +67,7 @@
 <body>
     <h1>PHP ejemplo de validacion de formularios</h1>
     <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
-        <span class="error">* <?php echo $Err;?></span><br><br>
+        <span class="error" style="<?php if(empty($hayError)) echo "color:black"; else echo "color:red"; ?>">* <?php echo $Err;?></span><br><br>
 
         Nombre: <input type="text" name="nombre" value="<?php echo $nombre;?>"/>
         <span class="error" style="<?php if(empty($nameErr)) echo "color:black"; else echo "color:red"; ?>">* <?php echo $nameErr;?></span><br><br>
