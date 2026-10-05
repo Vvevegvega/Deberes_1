@@ -1,25 +1,52 @@
 <?php
 
-    $sexoErr = "Se debe seleccionar sexo";
+    require("funcion_validar_email.php");
+    require("funcion_validar_url.php");
+
+    $sexoErr = "";
     $emailErr = "";
     $websiteErr = "";
-    $Err ="";
+    $nameErr = "";
 
-    $nombre ="";
-    $email ="";
-    $website="";
-    $sexo="";
+    $Err ="Los campos con astericos deben ser rellenados";
 
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        //Validar nombre REQUERIDO
 
-    if (empty($_POST["name"])) {
-        $nameErr = "El nombre es obligatorio";
-    } else {
-        $name = test_input($_POST["name"]);
-        if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
-            $nameErr = "Únicamente se permiten letras y espacios";
+        if (empty($_POST["nombre"])) {
+            $nameErr = "El nombre es obligatorio";
+        } else {
+            if (!preg_match("/^[a-zA-Z ]*$/",$_POST["nombre"])) {
+                $nameErr = "Únicamente se permiten letras y espacios";
+            }
+        }
+
+        //Validar email REQUERIDO
+        if (empty($_POST["email"])) {
+            $emailErr = "El email es obligatorio";
+        } else {
+            if(!validar_email($_POST["email"])){
+            $emailErr = "Email invalido";
+            }
+        }
+
+        //validar url NO REQUERIDO
+        if (!empty($_POST["website"])) {
+            if(!validar_url($_POST["email"])){
+                $websiteErr ="URL invalida";
+            }
+        }
+
+        //validar genero REQUERIDO
+        if(empty($_POST["sexo"])){
+            $sexoErr = "Debe seleccionar sexo";
         }
     }
-    
+
+    $nombre = isset($_POST["nombre"]) ? $_POST["nombre"] : "";
+    $email = isset($_POST["email"]) ? $_POST["email"] : "";
+    $website= isset($_POST["website"]) ? $_POST["website"] : "";
+    $sexo= isset($_POST["sexo"]) ? $_POST["sexo"] : "";
 ?>
 
 <!DOCTYPE html>
@@ -27,6 +54,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" >
     <title>Document</title>
 </head>
 <body>
@@ -34,14 +62,14 @@
     <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
         <span class="error">* <?php echo $Err;?></span><br><br>
 
-        Nombre: <input type="text" name="nombre"/>
-        <span class="error">* <?php echo $nameErr;?></span><br><br>
+        Nombre: <input type="text" name="nombre" value="<?php echo $nombre;?>"/>
+        <span class="error" style="<?php if(empty($nameErr)) echo "color:black"; else echo "color:red"; ?>">* <?php echo $nameErr;?></span><br><br>
 
         E-mail: <input type="text" name="email" value="<?php echo $email;?>">
-        <span class="error">* <?php echo $emailErr;?></span><br><br>
+        <span class="error" style="<?php if(empty($emailErr)) echo "color:black"; else echo "color:red"; ?>">* <?php echo $emailErr;?></span><br><br>
 
         Website: <input type="text" name="website" value="<?php echo $website;?>">
-        <span class="error">* <?php echo $websiteErr;?></span><br><br>
+        <span class="error" style="<?php if(empty($websiteErr)) echo "color:black"; else echo "color:red"; ?>"> <?php echo $websiteErr;?></span><br><br>
 
         <input type="radio" name="sexo"
             <?php if (isset($sexo) && $sexo=="mujer") echo "checked";?>
@@ -49,7 +77,10 @@
         <input type="radio" name="sexo"
             <?php if (isset($sexo) && $sexo=="hombre") echo "checked";?>
             value="hombre"> Hombre
-        <span class="error">* <?php echo $sexoErr;?></span><br><br>
+        <input type="radio" name="sexo"
+            <?php if (isset($sexo) && $sexo=="otro") echo "checked";?>
+            value="otro"> Otro
+        <span class="error" style="<?php if(empty($sexoErr)) echo "color:black"; else echo "color:red"; ?>">* <?php echo $sexoErr;?></span><br><br>
 
         <input type="submit" value="Submit">
     </form>
