@@ -13,7 +13,6 @@
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         //Validar nombre REQUERIDO
-
         if (empty($_POST["nombre"])) {
             $nameErr = "El nombre es obligatorio";
             $hayError = true;
