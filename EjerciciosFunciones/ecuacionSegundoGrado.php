@@ -1,29 +1,10 @@
 <?php
 
+    require("matematicas.php");
+
     $a = "a";
     $b = "b";
     $c = "c";
-
-    function solve($a, $b, $c){
-        $delta = sqrt(($b*$b) - (4*$a*$c));
-        
-        //NO real solutions
-        if($delta < 0){
-            return false;
-        }
-
-        //Real solutions
-        if( $delta == 0){
-            //1 real solution 2 times
-           return ($b*(-1) + $delta) / 2*$a;
-        }else {
-            //2 real solutions 1 time each
-            $alpha = ($b*(-1) + $delta) / 2*$a;
-            $beta = ($b*(-1) - $delta) / 2*$a;
-            $soluciones = array("alpha" => $alpha, "beta"=> $beta);
-            return $soluciones;
-        }
-    }
 
     $solution;
 
@@ -58,9 +39,37 @@
         <input type="submit" value="Submit">
     </form>
     <br>
-    <math display = "block">
-        <mrow><mn>-<?php echo $b; ?>±</mn></mrow>
+    <!-- Jugando con el math -->
+    <math>
+        <mrow>
+            <mi>x</mi>
+            <mo>=</mo>
+            <mfrac>
+                <mrow>
+                    <mo>−</mo>
+                    <mi><?php echo $b ?></mi>
+                    <mo>±</mo>
+                    <msqrt>
+                        <mrow>
+                            <msup>
+                                <mi><?php echo $b ?></mi>
+                                <mn>2</mn>
+                            </msup>
+                            <mo>−</mo>
+                            <mn>4</mn>
+                            <mi><?php echo $a ?></mi>
+                            <mi><?php echo $c ?></mi>
+                        </mrow>
+                    </msqrt>
+                </mrow>
+                <mrow>
+                    <mn>2</mn>
+                    <mi><?php echo $a ?></mi>
+                </mrow>
+            </mfrac>
+        </mrow>
     </math>
+    <br>
     <br>
     <?php if(isset($solution)){
         if($solution === false){
