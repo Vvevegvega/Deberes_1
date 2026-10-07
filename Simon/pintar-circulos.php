@@ -26,7 +26,7 @@
         $array_colores = [];
 
         for($i=0 ; $i < $numBotones ; $i++){
-            array_push($array_colores, $colores_validos[rand(0,$numBotones)]);
+            array_push($array_colores, $colores_validos[rand(0,$numBotones-1)]);
         }
         return $array_colores;
     }
@@ -43,9 +43,6 @@
                 echo "<circle id=circulo_".$i." r=50 cx=50 cy=50 fill=".$colores[$i]." />";
                 echo "</svg>";
             }
-
-        }else{
-            //Si no se cumple alguna de las condiciones
         }
     }
     /*

@@ -9,8 +9,20 @@
 
     //pinta los circulos
 
-?>
+    require("pintar-circulos.php");
 
+    $numBotones = 4;
+    $ErrMsg = "";
+
+    if($_SERVER["REQUEST_METHOD"] === 'POST'){
+        if($_POST["numBotones"] >= 4 && $_POST["numBotones"] <= 8){
+            $numBotones =$_POST["numBotones"];
+            pintar_circulos(generar_colores($_POST["numBotones"]));
+        }else{
+            $ErrMsg = "El numero debe estar comprendido entre 4 y 8";
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +31,10 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="POST" action="juego.php">
-        Numero de botones: <input type="text" name="numBotones" value = 4>
+    <form method="POST" action="">
+        Numero de botones: <input type="text" name="numBotones" value = <?php echo $numBotones; ?> >
     <input type="submit">
     </form>
+    <span style="color.red"><?php echo $ErrMsg; ?></span>
 </body>
 </html>
