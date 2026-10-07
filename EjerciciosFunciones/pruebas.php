@@ -1,8 +1,10 @@
 <?php 
+    //Dada una cadena de texto, devolver la cadena reordenada
+    // de tal manera que las palabras se ordenan de menor a 
+    // mayor longitud
+  
     //Variables:    is_null     is_string   strval
-
     //Funciones:    strlen      explode     implode
-
     //Arrays:       count       array_keys  asort(mantiene la asociacion) 
 
     function ordenar_texto_por_longitud_de_palabra($texto): string{
