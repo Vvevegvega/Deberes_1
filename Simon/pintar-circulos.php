@@ -1,32 +1,20 @@
 <?php
-    //Para la parte de sesion, lo del simon
-    //Formulario con el numero de circulos entre 4 y 8, los 
-
-    //NO hace falta lo de los colores elejidos, vamos a ahcer que con 5 colores escoja los 5 primeros y asi mas facil
-
-    //Por defecto, si yo elijo 5 colores, luego pulso 5 colores para elegir los colores a elegir
-    //El usuario elije los colores pulsando x cantidad de veces en diferentes colores
-
-    //Todos los botones de color estan siempre visibles
-
-    //pinta los circulos
-
     $colores_validos = array(
         "yellow", 
-        "blue", 
+        "lightblue", 
         "red", 
         "green", 
         "pink", 
         "orange",
-        "purple",
+        "violet",
         "grey");
-    
-    function generar_colores($numBotones):array{
+
+    function generar_colores($numBotones, $numColores):array{
         global $colores_validos;
         $array_colores = [];
 
         for($i=0 ; $i < $numBotones ; $i++){
-            array_push($array_colores, $colores_validos[rand(0,$numBotones-1)]);
+            array_push($array_colores, $colores_validos[rand(0, $numColores-1)]);
         }
         return $array_colores;
     }
@@ -46,30 +34,7 @@
                     echo "</svg>";
                 echo "</td>";
             }
-            echo "</tr></table>";
+            echo "</tr></table><br>";
         }
     }
-    /*
-    function pintar_circulos(array $colores){
-        global $colores_validos;
-        $dom = new DomDocument();
-        $dom->validateOnParse = true;
-
-        if(is_array($colores) 
-            && count($colores) >= 4 
-            && count($colores) <= 8){
-
-            for($i=0 ; $i < count($colores) ; $i++){
-                if(in_array($colores[$i], $colores_validos)){
-                    ($dom->getElementById("circulo_".$i)) -> setAttribute("fill", $colores[$i]);
-                }else{
-                    ($dom->getElementById("circulo_".$i)) -> setAttribute("fill", "white");
-                }
-            }
-
-        }else{
-            //Si no se cumple alguna de las condiciones
-        }
-    }
-    */
 ?>
