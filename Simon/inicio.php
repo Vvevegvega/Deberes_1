@@ -24,10 +24,12 @@
         <?php 
             if(isset($_SESSION['solucion'])){
                 pintar_circulos($_SESSION['solucion']);
-                pintar_circulos_apagados(count($_SESSION['solucion'])); 
+                pintar_circulos($_SESSION['intento']);
+                //pintar_circulos_apagados(count($_SESSION['solucion'])); 
             
                 global $colores_hex, $colores_esp;
                 for($i = 0 ; $i<$_SESSION['numColores'] ; $i++){
+                    //Que el boton cambie el array intento y que ya se printee todo normal
                     echo "<button style=background-color:".$colores_hex[$i]." >".$colores_esp[$i]."</button>";
                 }
             }

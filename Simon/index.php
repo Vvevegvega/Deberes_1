@@ -38,6 +38,7 @@
 
                         $solucion = generar_colores($_POST["numBotones"],$_POST["numColores"]);
                         $_SESSION['solucion'] = $solucion;
+                        $_SESSION['intento'] = generar_intento($_POST["numBotones"]);
                         $_SESSION['numColores'] = $numColores;
                         pintar_circulos($solucion); 
                             

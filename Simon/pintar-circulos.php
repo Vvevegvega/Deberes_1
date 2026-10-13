@@ -46,6 +46,14 @@
         }
     }
 
+    function generar_intento($numCirculos):array{
+        $intento = [];
+        for($i=0 ; $i<$numCirculos ; $i++){
+            array_push($intento,"black");
+        }
+        return $intento;
+    }
+
     function pintar_circulos_apagados($numCirculos){
         $allblack = [];
         for($i=0 ; $i<$numCirculos ; $i++){
@@ -53,4 +61,5 @@
             }
         pintar_circulos($allblack);
     }
+
 ?>
