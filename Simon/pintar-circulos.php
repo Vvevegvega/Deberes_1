@@ -7,8 +7,8 @@
         "#ff721aff", 
         "#ff1a9cff", 
         "#a01affff", 
-        "#8d8d8dff", );
-    
+        "#8d8d8dff", 
+    );
     $colores_esp = array(
         "Azul", 
         "Rojo", 
@@ -17,7 +17,8 @@
         "Naranja", 
         "Rosa",
         "Morado",
-        "Gris");
+        "Gris"
+    );
 
     function generar_colores($numBotones, $numColores):array{
         global $colores_hex;
@@ -46,7 +47,7 @@
         }
     }
 
-    function generar_intento($numCirculos):array{
+    function generar_jugada_nueva($numCirculos):array{
         $intento = [];
         for($i=0 ; $i<$numCirculos ; $i++){
             array_push($intento,"black");
@@ -54,6 +55,21 @@
         return $intento;
     }
 
+    function sonIguales($array1, $array2){
+        if(count($array1) !== count($array2)) return false;
+
+        for($i = 0 ; $i<count($array1) ; $i++){
+            if($array1[$i] !== $array2[$i]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Esto era el metodo original pero prefiero la idea de generar y guardar el intento y luego ya pedir al otro
+     * metodo que imprima lo que le llegue
+     */
     function pintar_circulos_apagados($numCirculos){
         $allblack = [];
         for($i=0 ; $i<$numCirculos ; $i++){

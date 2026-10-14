@@ -7,6 +7,10 @@
     //Todos los botones de color estan siempre visibles
     //pinta los circulos
 
+    // pulsar amarillo => cambio el array jugada pintandolo del color del boton
+    // aumento la posicion [pulsaciones]
+    // vuelvo a pintar la jugada
+
     require("pintar-circulos.php");
 ?>
 <!DOCTYPE html>
@@ -22,16 +26,35 @@
         
         <!-- Aqui creamos y coloreamos botones y los circulos -->
         <?php 
+            if($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST['botonColor'])){
+                if($_SESSION['pulsaciones'] < count($_SESSION['jugada'])){
+                    $_SESSION['jugada'][$_SESSION['pulsaciones']] = $_POST['botonColor'];
+                    $_SESSION['pulsaciones'] = $_SESSION['pulsaciones']+1;
+                }
+                if($_SESSION['pulsaciones'] == count($_SESSION['jugada'])){
+                    //Se acaba el juego
+                    pintar_circulos($_SESSION['solucion']);
+                    if(sonIguales($_SESSION['solucion'], $_SESSION['jugada'])){
+                        echo "Ganaste";
+                    }else{
+                        echo "Perdiste";
+                    }
+                    echo   "<form method=post action=\"index.php\">
+                                <input type=submit value=\"Volver a jugar\" </input>
+                            </form>";
+                }
+            }
+
             if(isset($_SESSION['solucion'])){
-                pintar_circulos($_SESSION['solucion']);
-                pintar_circulos($_SESSION['intento']);
-                //pintar_circulos_apagados(count($_SESSION['solucion'])); 
+                pintar_circulos($_SESSION['jugada']);
             
                 global $colores_hex, $colores_esp;
+                echo "<form method=POST action=\"\" >";
                 for($i = 0 ; $i<$_SESSION['numColores'] ; $i++){
                     //Que el boton cambie el array intento y que ya se printee todo normal
-                    echo "<button style=background-color:".$colores_hex[$i]." >".$colores_esp[$i]."</button>";
+                    echo "<button type=submit value=".$colores_hex[$i]." name=botonColor style=background-color:".$colores_hex[$i]." >".$colores_esp[$i]."</button>";
                 }
+                echo "</form>";
             }
         ?>
     </main>

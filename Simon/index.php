@@ -28,7 +28,7 @@
         
         <!-- Aqui creamos y coloreamos botones y los circulos -->
         <?php 
-        if($_SERVER["REQUEST_METHOD"] === 'POST'){
+        if($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST["numBotones"])){
             if(($_POST["numBotones"] >= 4 && $_POST["numBotones"] <= 8) 
                         && $_POST["numColores"] >= 4 && $_POST["numColores"] <= 8){
                         global $solucion;
@@ -38,14 +38,16 @@
 
                         $solucion = generar_colores($_POST["numBotones"],$_POST["numColores"]);
                         $_SESSION['solucion'] = $solucion;
-                        $_SESSION['intento'] = generar_intento($_POST["numBotones"]);
+                        $_SESSION['pulsaciones'] = 0;
                         $_SESSION['numColores'] = $numColores;
+                        $_SESSION['jugada'] = generar_jugada_nueva($_POST["numBotones"]);
                         pintar_circulos($solucion); 
                             
-                        //Esto se siente un poco guarrada
-                        echo "<br><form method=POST action=inicio.php>
-                                <input type=submit value=Empezar>
-                            </form><br>";
+                        echo "<br>
+                              <form method=POST action=inicio.php>
+                                  <input type=submit value=Empezar>
+                              </form>
+                              <br>";
                     }else{
                         $ErrMsg = "El numero de botones debe estar comprendido entre 4 y 8 y el número de colores entre 4 y 8";
                     }
