@@ -35,6 +35,7 @@
                     //Se acaba el juego
                     //Esto creo que es un poco guarrada y lo suyo seria usar un ruter o algo asi yo creo
                     header("Location: /26_27_DWES_Ivan/Deberes_1/Simon/finJuego.php");
+                    die();
                 }
             }
 
