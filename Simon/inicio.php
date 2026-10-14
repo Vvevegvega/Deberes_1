@@ -33,15 +33,8 @@
                 }
                 if($_SESSION['pulsaciones'] == count($_SESSION['jugada'])){
                     //Se acaba el juego
-                    pintar_circulos($_SESSION['solucion']);
-                    if(sonIguales($_SESSION['solucion'], $_SESSION['jugada'])){
-                        echo "Ganaste";
-                    }else{
-                        echo "Perdiste";
-                    }
-                    echo   "<form method=post action=\"index.php\">
-                                <input type=submit value=\"Volver a jugar\" </input>
-                            </form>";
+                    //Esto creo que es un poco guarrada y lo suyo seria usar un ruter o algo asi yo creo
+                    header("Location: /26_27_DWES_Ivan/Deberes_1/Simon/finJuego.php");
                 }
             }
 
