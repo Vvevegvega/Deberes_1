@@ -2,14 +2,6 @@
     session_start();
     require("pintar-circulos.php");
 
-    //Miramos si hay algun color puesto y en caso de haber creamos cookie
-    if($_SERVER["REQUEST_METHOD"] === 'POST' 
-        && isset($_POST['colorFondo'])){
-        setcookie( "colorFondo", $_POST['colorFondo'], [
-                'expires' => time() + 300000,
-        ]);
-    }
-
     //Comprobaciones de la partida y la logica de pulsar botones y colorear
     if($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST['botonColor'])){
         //Si no se acabó, cambiamos el color del circulo de array intentos correspondiente

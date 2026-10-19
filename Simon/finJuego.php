@@ -17,24 +17,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body style="background-color:<?php echo $colorFondo; ?>">
+<body style="background-color:<?= $colorFondo ?>">
     <main>
-        <h1> Hola <?php echo $usuario; ?>, Simon dice...</h1>
+        <h1> Hola <?= $usuario ?>, Simon dice...</h1>
         
         <!-- Aqui creamos y coloreamos botones y los circulos -->
         <?php 
-            echo "<h2>Solucion:</h2>";
+            echo "<h2>La solución era:</h2>";
             pintar_circulos($_SESSION['solucion']);
-
             echo "<br>";
 
-            echo "<h2>Tu respuesta:</h2>";
+            echo "<h2>Tu respuesta es:</h2>";
             pintar_circulos($_SESSION['jugada']);
+            echo "<br>";
 
             if(sonIguales($_SESSION['solucion'], $_SESSION['jugada'])){
-                echo "Ganaste";
+                echo "<h3>Ganaste</h3>";
             }else{
-                echo "Perdiste";
+                echo "<h3>Perdiste</h3>";
             }
 
             echo "<br>";

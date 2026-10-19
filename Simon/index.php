@@ -15,6 +15,13 @@
             $_SESSION['usuario'] = $_POST['usuario'];
         }
 
+        //Miramos si hay algun color puesto y en caso de haber creamos cookie
+        if(isset($_POST['colorFondo'])){
+            setcookie( "colorFondo", $_POST['colorFondo'], [
+                    'expires' => time() + 300000,
+            ]);
+        }
+
         //Ajustes de la partida metidas en sesion
         if(($_POST["numBotones"] >= 4 && $_POST["numBotones"] <= 8) 
             && $_POST["numColores"] >= 4 && $_POST["numColores"] <= 8){
@@ -52,9 +59,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body style="background-color:<?php echo $colorFondo; ?>">
+<body style="background-color:<?= $colorFondo ?>">
     <main>
-        <h1> Hola <?php echo $usuario; ?>, Simon dice...</h1>
+        <h1> Hola <?= $usuario ?>, Simon dice...</h1>
         
         <?php //Aqui creamos el boton del form para empezar y pintamos la solucion a memorizar
         if($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST["numBotones"])){
@@ -75,17 +82,17 @@
         ?>
 
         <form method="POST" action="">
-            Nombre: <input type="text" name="usuario">
+            Nombre: <input type="text" name="usuario" value= <?= $usuario ?>>
             <br>
-            Numero de botones: <input type="number" name="numBotones" value = <?php echo $numCirculos; ?> >
+            Numero de botones: <input type="number" name="numBotones" value = <?= $numCirculos ?> >
             <br>
-            Numero de colores: <input type="number" name="numColores" value = <?php echo $numColores; ?> >
+            Numero de colores: <input type="number" name="numColores" value = <?= $numColores ?> >
             <br>
-            Color de fondo: <input type="text" name="colorFondo" value=<?php echo $colorFondo; ?>>
+            Color de fondo: <input type="text" name="colorFondo" value=<?= $colorFondo ?>>
             <br>
             <input type="submit">
         </form>
-        <span style="color.red"><?php echo $ErrMsg; ?></span>
+        <span style="color.red"><?= $ErrMsg ?></span>
     </main>
 
 </body>
