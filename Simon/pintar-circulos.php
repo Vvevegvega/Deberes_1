@@ -20,6 +20,12 @@
         "Gris"
     );
 
+    /**
+     * Metodo que toma un numero de botones a generar usando un numero 
+     * de colores especificos.
+     * @returns un nuevo array con tantos elementos como numcolores
+     * relleno de colores aleatorios de $colores_hex
+     */
     function generar_colores($numBotones, $numColores):array{
         global $colores_hex;
         $array_colores = [];
@@ -30,6 +36,11 @@
         return $array_colores;
     }
 
+    /**
+     * Metodo que obtiene un array con codigos de colores html y genera por pantalla
+     * el codigo svg para representar circulos con los colores especificados en el
+     * array de entrada.
+     */
     function pintar_circulos(array $colores){
         if(is_array($colores) 
             && count($colores) >= 4 
@@ -47,6 +58,11 @@
         }
     }
 
+    /**
+     * Metodo que toma un numero de circulos para generar un nuevo intento del
+     * usuario sin empezar (es decir, con todos los colores a "black")
+     * @returns un array con la longitud especificada con todos los valores = "black"
+     */
     function generar_jugada_nueva($numCirculos):array{
         $intento = [];
         for($i=0 ; $i<$numCirculos ; $i++){
@@ -55,6 +71,13 @@
         return $intento;
     }
 
+    /**
+     * Metodo que compara dos arrays elemento a elemento para comprobar si son
+     * iguales entre si.
+     * @returns false si el numero de elementos difiere o algun elemento en la misma 
+     * posicion difiere
+     * @returns true en caso de que sean iguales en longitud y elementos
+     */
     function sonIguales($array1, $array2){
         if(count($array1) !== count($array2)) return false;
 
@@ -64,18 +87,6 @@
             }
         }
         return true;
-    }
-
-    /**
-     * Esto era el metodo original pero prefiero la idea de generar y guardar el intento y luego ya pedir al otro
-     * metodo que imprima lo que le llegue
-     */
-    function pintar_circulos_apagados($numCirculos){
-        $allblack = [];
-        for($i=0 ; $i<$numCirculos ; $i++){
-                array_push($allblack,"black");
-            }
-        pintar_circulos($allblack);
     }
 
 ?>

@@ -8,19 +8,16 @@
         'expires' => time() + 300000,
     ]);
 
-    //Comprobaciones para dejar todo listo
+    //Comprobaciones una vez se pulsa el boton
     if($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST["numBotones"])){
-
+        //Añadir nombre de usuario a la sesion
         if(!empty(trim($_POST['usuario']))){
             $_SESSION['usuario'] = $_POST['usuario'];
         }
 
+        //Ajustes de la partida metidas en sesion
         if(($_POST["numBotones"] >= 4 && $_POST["numBotones"] <= 8) 
             && $_POST["numColores"] >= 4 && $_POST["numColores"] <= 8){
-
-            setcookie( "colorFondo", $_POST['colorFondo'], [
-                'expires' => time() + 300000,
-            ]);
 
             $numColores = $_POST["numColores"];
             $numBotones = $_POST["numBotones"];
@@ -67,12 +64,12 @@
 
                 pintar_circulos($solucion); 
                 echo "<br>
-                        <form method=POST action=inicio.php>
+                        <form method=POST action=juego.php>
                             <input type=submit value=Empezar>
                         </form>
                       <br>";
             }else{
-                $ErrMsg = "El numero de botones debe estar comprendido entre 4 y 8 y el número de colores entre 4 y 8";
+                $ErrMsg = "El numero de botones y de colores debe estar comprendido entre 4 y 8";
             }
         }
         ?>
