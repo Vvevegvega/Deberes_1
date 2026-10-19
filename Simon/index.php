@@ -1,19 +1,25 @@
 <?php
-    //Para la parte de sesion, lo del simon
-    //Formulario con el numero de circulos entre 4 y 8, los 
-    //Por defecto, si yo elijo 5 colores, luego pulso 5 colores para elegir los colores a elegir
-    //El usuario elije los colores pulsando x cantidad de veces en diferentes colores
-    //Todos los botones de color estan siempre visibles
-    //pinta los circulos
     session_start();
-    $_SESSION['usuario'] = "Iván";
 
     require("pintar-circulos.php");
 
-    $numBotones = 4;
+    setcookie( "numCirculos", 7, [
+        'expires' => time() + 300000,
+        'path' => '/',
+        'domain' => 'localhost',
+        'secure' => false,
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ]);
+
     $numColores = 4;
     $ErrMsg = "";
-    $solucion;
+
+    /* TODO
+        Primera pantalla del simon donde tenemos la aga donde ponemos el numero de circulos y el numero de colores, inicialmente valor 4
+        Vamos a meter una cookie de sesion para que, en lugar de fijarlo a 4, vamos a crear una cookie donde se guarde el valor elegido por el usuario
+        Meter un nuevo campo al form "numero de circulos cookie" con un boton cambiar
+    */
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,40 +30,48 @@
 </head>
 <body>
     <main>
-        <h1> Hola <?php echo $_SESSION['usuario']; ?>, Simon dice...</h1>
+        <h1>Simon dice...</h1>
         
         <!-- Aqui creamos y coloreamos botones y los circulos -->
         <?php 
         if($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST["numBotones"])){
             if(($_POST["numBotones"] >= 4 && $_POST["numBotones"] <= 8) 
-                        && $_POST["numColores"] >= 4 && $_POST["numColores"] <= 8){
-                        global $solucion;
-                        
-                        $numColores = $_POST["numColores"];
-                        $numBotones = $_POST["numBotones"];
+                && $_POST["numColores"] >= 4 && $_POST["numColores"] <= 8){
 
-                        $solucion = generar_colores($_POST["numBotones"],$_POST["numColores"]);
-                        $_SESSION['solucion'] = $solucion;
-                        $_SESSION['pulsaciones'] = 0;
-                        $_SESSION['numColores'] = $numColores;
-                        $_SESSION['jugada'] = generar_jugada_nueva($_POST["numBotones"]);
-                        pintar_circulos($solucion); 
-                            
-                        echo "<br>
-                              <form method=POST action=inicio.php>
-                                  <input type=submit value=Empezar>
-                              </form>
-                              <br>";
-                    }else{
-                        $ErrMsg = "El numero de botones debe estar comprendido entre 4 y 8 y el número de colores entre 4 y 8";
-                    }
+                $_SESSION['usuario'] = $_POST['usuario'];
+                setcookie( "colorFondo", $_POST['colorFondo'], [
+                    'expires' => time() + 300000,
+                ]);
+
+                $numColores = $_POST["numColores"];
+                $numBotones = $_POST["numBotones"];
+
+                $solucion = generar_colores($_POST["numBotones"],$_POST["numColores"]);
+                $_SESSION['solucion'] = $solucion;
+                $_SESSION['pulsaciones'] = 0;
+                $_SESSION['numColores'] = $numColores;
+                $_SESSION['jugada'] = generar_jugada_nueva($_POST["numBotones"]);
+                pintar_circulos($solucion); 
+
+                echo "<br>
+                        <form method=POST action=inicio.php>
+                            <input type=submit value=Empezar>
+                        </form>
+                        <br>";
+            }else{
+                $ErrMsg = "El numero de botones debe estar comprendido entre 4 y 8 y el número de colores entre 4 y 8";
+            }
         }
         ?>
 
         <form method="POST" action="">
-            Numero de botones: <input type="number" name="numBotones" value = <?php echo $numBotones; ?> >
+            Nombre: <input type="text" name="usuario">
+            <br>
+            Numero de botones: <input type="number" name="numBotones" value = <?php echo $_COOKIE['numCirculos']; ?> >
             <br>
             Numero de colores: <input type="number" name="numColores" value = <?php echo $numColores; ?> >
+            <br>
+            Color de fondo: <input type="text" name="colorFondo">
             <br>
             <input type="submit">
         </form>
