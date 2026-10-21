@@ -21,7 +21,7 @@
     <main>
         <h1> Hola <?= $usuario ?>, Simon dice...</h1>
         
-        <!-- Aqui creamos y coloreamos botones y los circulos -->
+        <!-- Aqui creamos y coloreamos el intento y la solucion -->
         <?php 
             echo "<h2>La solución era:</h2>";
             pintar_circulos($_SESSION['solucion']);
@@ -36,12 +36,10 @@
             }else{
                 echo "<h3>Perdiste</h3>";
             }
-
-            echo "<br>";
-            echo "<form method=post action=\"index.php\">
-                        <input type=submit value=\"Volver a jugar\" </input>
-                </form>";
         ?>
+        <form method=post action="inicio.php">
+            <input type=submit value="Volver a jugar">
+        </form>
     </main>
 
 </body>
