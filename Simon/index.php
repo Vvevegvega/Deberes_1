@@ -9,7 +9,8 @@
 
             if($usuario !==  false 
             && $usuario['Nombre'] === $_POST['nombreUsuario']
-            && $usuario['Clave'] === $_POST['passUsuario']){
+            && password_verify($_POST['passUsuario'], $usuario['Clave'])){
+                
                 //Meter los valores correspondientes en sesion
                 session_start();
                 $_SESSION['usuario'] = $usuario['Nombre'];
@@ -29,16 +30,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Simon - Inicio de sesion</title>
 </head>
 <body>
+    <h1><a href="./">Simon dice</a></h1>
+    <h2>Inicio de sesion</h2>
     <form method='POST' action=''>
-        Nombre de usuario <input type='text' name="nombreUsuario">
+        Nombre de usuario <input type='text' name="nombreUsuario" required>
         <br>
-        Contraseña <input type='password' name="passUsuario">
+        Contraseña <input type='password' name="passUsuario" required>
         <br>
         <input type='submit' value='Iniciar sesión'>
     </form>
     <span style="color:red"> <?= $_errMsg ?> <span>
+    <br>
+    <a href="./registro.php">Crear una cuenta nueva</a>
 </body>
 </html>

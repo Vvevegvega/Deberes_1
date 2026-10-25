@@ -19,7 +19,7 @@
     $pdo = null; // Inicializamos la variable para el bloque finally
     try {
         $pdo = new PDO($dsn, $user, $password, $opciones);
-        echo "Conexión establecida correctamente.<br>";
+        echo "<script>console.log('Conexión establecida correctamente.');</script>";
     } catch (PDOException $e) {
         // Registramos el detalle técnico en el log del servidor (oculto al visitante)
         error_log("Error de conexión PDO: " . $e->getMessage());

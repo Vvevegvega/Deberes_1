@@ -2,24 +2,24 @@
     require_once 'usuarioModel.php';
     $_errMsg = "";
 
-    //TODO
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
         if(isset($_POST) && isset($_POST['nombreUsuario'])){
             //Check si ya existen en la base de datos
-            $usuario = buscar_usuario_por_username($_POST['nombreUsuario']);
+            if(!buscar_usuario_por_username($_POST['nombreUsuario'])){
+                // Aqui les meto el valor de jugador por defecto, 
+                // ya si eso crearemos una pantalla para añadir admins
+                $rol = 0;
+                
+                insertar_nuevo_jugador(
+                    $_POST['nombreUsuario'], 
+                    password_hash($_POST['passUsuario'], PASSWORD_DEFAULT),
+                    $rol
+                );
 
-            if($usuario !==  false 
-            && $usuario['Nombre'] === $_POST['nombreUsuario']
-            && $usuario['Clave'] === $_POST['passUsuario']){
-                //Meter los valores correspondientes en sesion
-                session_start();
-                $_SESSION['usuario'] = $usuario['Nombre'];
-                $_SESSION['rolUsuario'] = $usuario['Rol'];
-
-                header("Location: ./inicio.php");
+                header("Location: ./");
                 die;
             }else{
-                $_errMsg = "Credenciales incorrectas";
+                $_errMsg = "El usuario ya existe en la base de datos";
             }  
         }
     }
@@ -30,15 +30,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Simon - Registro</title>
 </head>
 <body>
+    <h1><a href="./">Simon dice</a></h1>
+    <h2>Crear una nueva cuenta</h2>
     <form method='POST' action=''>
-        Nombre de usuario <input type='text' name="nombreUsuario">
+        Nombre de usuario <input type='text' name="nombreUsuario" required>
         <br>
-        Contraseña <input type='password' name="passUsuario">
+        Contraseña <input type='password' name="passUsuario" required>
         <br>
-        <input type='submit' value='Iniciar sesión'>
+        <input type='submit' value='Crear cuenta'>
     </form>
     <span style="color:red"> <?= $_errMsg ?> <span>
 </body>
