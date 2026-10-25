@@ -1,16 +1,10 @@
 <?php
-<<<<<<< HEAD
     require_once 'usuarioModel.php';
-=======
-    $_usuario = "pepe";
-    $_contra = password_hash("abc", PASSWORD_DEFAULT);
->>>>>>> acd5b5bbbe211c21e8833b0db083949f633708c5
     $_errMsg = "";
 
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
         if(isset($_POST) && isset($_POST['nombreUsuario'])){
             //Check si ya existen en la base de datos
-<<<<<<< HEAD
             $usuario = buscar_usuario_por_username($_POST['nombreUsuario']);
 
             if($usuario !==  false 
@@ -25,18 +19,6 @@
                 die;
             }else{
                 $_errMsg = "Credenciales incorrectas";
-=======
-            //TODO
-
-            //Check si coinciden usuario con contraseña
-            if($_POST['nombreUsuario'] === $_usuario 
-            && password_verify($_POST['passUsuario'], $_contra)){
-                //Meter los valores correspondientes en sesion
-                header("Location: ./inicio.php");
-                die;
-            }else{
-                $_errMsg = "Credenciales incorrectas: ". password_hash($_POST['passUsuario'], PASSWORD_DEFAULT);
->>>>>>> acd5b5bbbe211c21e8833b0db083949f633708c5
             }  
         }
     }
