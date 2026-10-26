@@ -2,10 +2,6 @@
     session_start();
     require "../controller/pintar-circulos.php";
 
-    $usuario = isset($_SESSION['usuario'])
-        ?$_SESSION['usuario']
-        :"usuario";
-
     $colorFondo = isset($_COOKIE['colorFondo'])
         ? $_COOKIE['colorFondo']
         : "lightgrey";
@@ -20,7 +16,7 @@
 <body style="background-color:<?= $colorFondo ?>">
     <main>
         <h1> Simon dice...</h1>
-        <h2> Enhorabuena, <?= $usuario ?>, acertaste!</h2>
+        <h2> Enhorabuena, <?= $_SESSION['usuario'] ?>, acertaste!</h2>
         
         <!-- Aqui creamos y coloreamos el intento y la solucion -->
         <?php 

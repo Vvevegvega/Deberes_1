@@ -1,4 +1,5 @@
   <?php
+  function open_conection(){
     $host = 'localhost';
     $dbname = 'dbsimon_ivan';
     $user = 'root';
@@ -28,4 +29,6 @@
     // El bloque finally se ejecuta SIEMPRE para cerrar recursos
     // (En un script real cerramos al finalizar todas las consultas)
     }
+  }
+
 ?>

@@ -1,4 +1,6 @@
 <?php
+    require "../model/configModel.php";
+
     $colores_hex = array(
         "#1a66ffff", 
         "#ff1a1aff", 
@@ -87,6 +89,14 @@
             }
         }
         return true;
+    }
+
+    function getNumColores(){
+        return get_archivo_configuracion_simon()['num_circulos'];
+    }
+
+    function getNumBotones(){
+        return get_archivo_configuracion_simon()['num_colores'];
     }
 
 ?>

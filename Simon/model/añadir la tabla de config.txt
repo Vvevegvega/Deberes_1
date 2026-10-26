@@ -1,0 +1,12 @@
+create table configuracion(
+    clave_config INT NOT NULL AUTO_INCREMENT,
+    num_circulos INT NOT NULL,
+    num_colores INT NOT NULL,
+    CONSTRAINT pkConfig PRIMARY KEY(clave_config),
+    CONSTRAINT ckNumColores CHECK (num_colores BETWEEN 4 AND 8),
+    CONSTRAINT ckNumCirculos CHECK (num_circulos BETWEEN 4 AND 8)
+),
+
+INSERT INTO configuracion 
+    (num_circulos, num_colores)
+    VALUES(4,4)

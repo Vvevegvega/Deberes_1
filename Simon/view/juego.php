@@ -25,10 +25,6 @@
         }
     }
 
-    $usuario = isset($_SESSION['usuario'])
-        ?$_SESSION['usuario']
-        :"usuario";
-
     $colorFondo = isset($_COOKIE['colorFondo'])
         ? $_COOKIE['colorFondo']
         : "lightgrey";
@@ -43,7 +39,7 @@
 </head>
 <body style="background-color:<?php echo $colorFondo; ?>">
     <main>
-        <h1> Hola <?php echo $usuario; ?>, Simon dice...</h1>
+        <h1> Hola <?php echo $_SESSION['usuario']; ?>, Simon dice...</h1>
         <?php 
             if(isset($_SESSION['solucion'])){
                 //Pintamos los circulos

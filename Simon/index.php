@@ -1,5 +1,6 @@
 <?php
-    require_once './model/usuarioModel.php';
+    require './model/usuarioModel.php';
+    require './controller/seguridad.php';
     $_errMsg = "";
 
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
@@ -16,20 +17,8 @@
                 $_SESSION['usuario'] = $usuario['Nombre'];
                 $_SESSION['rolUsuario'] = $usuario['Rol'];
 
-                switch($usuario['Rol']){
-                    case 0: //Jugador
-                        header("Location: ./view/inicio.php");
-                        die;
-                        break;
-                    case 1: //Admin
-                        header("Location: ./view/admin.php");
-                        die;
-                        break;
-                    default:
-                        //Pantalla de error a lo mejor?
-                        die;
-                        break;
-                }
+                //Encaminar a la pantalla correspondiente
+                filtrar_acceso();
             }else{
                 $_errMsg = "Credenciales incorrectas";
             }  

@@ -1,5 +1,5 @@
 <?php
-    require_once 'conexion.php'; // Obtenemos la conexión $pdo
+    require 'conexion.php'; // Obtenemos la conexión $pdo
     
     function buscar_usuario_por_username($userName){
         global $pdo;
@@ -19,7 +19,7 @@
                 echo "No se pudo obtener el usuario.";
             } finally {
                 $stmt = null; // Liberamos el cursor
-                //$pdo = null; // Cerramos la conexión
+                $pdo = null; // Cerramos la conexión
             }
         }
     }
@@ -43,7 +43,7 @@
             echo "No se pudo insertal el usuario.";
         } finally {
             $stmt = null; // Liberamos el cursor
-            //$pdo = null; // Cerramos la conexión
+            $pdo = null; // Cerramos la conexión
         }
     }
     

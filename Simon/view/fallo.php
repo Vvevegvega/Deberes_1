@@ -21,7 +21,7 @@
 <body style="background-color:<?= $colorFondo ?>">
     <main>
         <h1> Simon dice...</h1>
-        <h2> Falaste, <?= $usuario ?>... ánimo con la proxima vez!</h2>
+        <h2> Falaste, <?= $_SESSION['usuario'] ?>... ánimo con la proxima vez!</h2>
         
         <!-- Aqui creamos y coloreamos el intento y la solucion -->
         <?php 

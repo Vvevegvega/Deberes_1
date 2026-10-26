@@ -1,5 +1,5 @@
 <?php
-    require_once '../model/usuarioModel.php';
+    require '../model/usuarioModel.php';
     $_errMsg = "";
 
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
@@ -13,7 +13,7 @@
                     password_hash($_POST['passUsuario'], PASSWORD_DEFAULT),
                     0
                 );
-
+                
                 header("Location: ../");
                 die;
             }else{
