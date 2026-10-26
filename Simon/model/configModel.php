@@ -2,6 +2,7 @@
     require 'conexion.php'; // Obtenemos la conexión $pdo
 
     function get_archivo_configuracion_simon(){
+        open_conection();
         global $pdo;
 
         try {

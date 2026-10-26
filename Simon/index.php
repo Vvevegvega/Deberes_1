@@ -1,6 +1,7 @@
 <?php
     require './model/usuarioModel.php';
     require './controller/seguridad.php';
+    
     $_errMsg = "";
 
     if($_SERVER["REQUEST_METHOD"] === 'POST'){

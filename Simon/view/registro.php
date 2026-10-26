@@ -30,7 +30,7 @@
     <title>Simon - Registro</title>
 </head>
 <body>
-    <h1><a href="./">Simon dice</a></h1>
+    <h1><a href="../">Simon dice</a></h1>
     <h2>Crear una nueva cuenta</h2>
     <form method='POST' action=''>
         Nombre de usuario <input type='text' name="nombreUsuario" required>

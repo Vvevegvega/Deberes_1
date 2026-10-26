@@ -2,6 +2,7 @@
     require 'conexion.php'; // Obtenemos la conexión $pdo
     
     function buscar_usuario_por_username($userName){
+        open_conection();
         global $pdo;
         if(!empty(trim($userName))){
             try {
@@ -25,6 +26,7 @@
     }
 
     function insertar_nuevo_jugador($username, $passHash, $rol){
+        open_conection();
         global $pdo;
         try {
             var_dump($pdo);
