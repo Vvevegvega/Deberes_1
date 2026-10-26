@@ -1,5 +1,5 @@
 <?php
-    require_once 'usuarioModel.php';
+    require_once './model/usuarioModel.php';
     $_errMsg = "";
 
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
@@ -16,14 +16,25 @@
                 $_SESSION['usuario'] = $usuario['Nombre'];
                 $_SESSION['rolUsuario'] = $usuario['Rol'];
 
-                header("Location: ./inicio.php");
-                die;
+                switch($usuario['Rol']){
+                    case 0: //Jugador
+                        header("Location: ./view/inicio.php");
+                        die;
+                        break;
+                    case 1: //Admin
+                        header("Location: ./view/admin.php");
+                        die;
+                        break;
+                    default:
+                        //Pantalla de error a lo mejor?
+                        die;
+                        break;
+                }
             }else{
                 $_errMsg = "Credenciales incorrectas";
             }  
         }
     }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +55,6 @@
     </form>
     <span style="color:red"> <?= $_errMsg ?> <span>
     <br>
-    <a href="./registro.php">Crear una cuenta nueva</a>
+    <a href="./view/registro.php">Crear una cuenta nueva</a>
 </body>
 </html>

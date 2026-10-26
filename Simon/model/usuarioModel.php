@@ -1,5 +1,6 @@
 <?php
     require_once 'conexion.php'; // Obtenemos la conexión $pdo
+    
     function buscar_usuario_por_username($userName){
         global $pdo;
         if(!empty(trim($userName))){

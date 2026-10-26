@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require("pintar-circulos.php");
+    require "../controller/pintar-circulos.php";
 
     //Al tener esto asi a pelo la primera vez que abro da error, tendria que hacer un check 
     // y poner un valor especifico default pero esto es lo que tenemos que hacer de deberes

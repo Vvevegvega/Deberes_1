@@ -1,5 +1,5 @@
 <?php
-    require_once 'usuarioModel.php';
+    require_once '../model/usuarioModel.php';
     $_errMsg = "";
 
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
@@ -8,22 +8,19 @@
             if(!buscar_usuario_por_username($_POST['nombreUsuario'])){
                 // Aqui les meto el valor de jugador por defecto, 
                 // ya si eso crearemos una pantalla para añadir admins
-                $rol = 0;
-                
                 insertar_nuevo_jugador(
                     $_POST['nombreUsuario'], 
                     password_hash($_POST['passUsuario'], PASSWORD_DEFAULT),
-                    $rol
+                    0
                 );
 
-                header("Location: ./");
+                header("Location: ../");
                 die;
             }else{
                 $_errMsg = "El usuario ya existe en la base de datos";
             }  
         }
     }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

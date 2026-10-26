@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require("pintar-circulos.php");
+    require "../controller/pintar-circulos.php";
 
     //Comprobaciones de la partida y la logica de pulsar botones y colorear
     if($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST['botonColor'])){
@@ -14,8 +14,14 @@
         //Se podria meter aqui la comprobacion de victoria o derrota y luego
         //redirigir al modulo correspondiente pero asi deberia estar bien de momento
         if($_SESSION['pulsaciones'] == count($_SESSION['jugada'])){
-            header("Location: ./finJuego.php");
-            die();
+            if(sonIguales($_SESSION['jugada'], $_SESSION['solucion'])){
+                header("Location: ./acierto.php");
+                die();
+            }else{
+                header("Location: ./fallo.php");
+                die();
+            }
+            
         }
     }
 
