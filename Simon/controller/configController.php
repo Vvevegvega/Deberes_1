@@ -1,5 +1,5 @@
 <?php
-    require "../model/configModel.php";
+    require_once "../model/configModel.php";
     
     function getNumColores(){
         return (int) get_archivo_configuracion_simon()['num_colores'];

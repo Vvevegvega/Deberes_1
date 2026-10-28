@@ -45,5 +45,28 @@
             $pdo = null; // Cerramos la conexión
         }
     }
+
+    function get_codigo_usuario($userName){
+        $pdo = open_conection();
+        if(!empty(trim($userName))){
+            try {
+                $sql = "SELECT Codigo
+                    FROM usuarios
+                    WHERE nombre = :userName";
+
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([':userName' => $userName]);
+                
+                return $stmt->fetch();
+
+            } catch (PDOException $e) {
+                error_log("Error en SELECT: " . $e->getMessage());
+                echo "No se pudo obtener el usuario.";
+            } finally {
+                $stmt = null; // Liberamos el cursor
+                $pdo = null; // Cerramos la conexión
+            }
+        }
+    }
     
 ?>

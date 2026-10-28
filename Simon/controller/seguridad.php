@@ -11,17 +11,17 @@
             case 0: //Jugador
                 header("Location: ./view/inicio.php");
                 die;
-                break;
+            break;
             case 1: //Admin
                 header("Location: ./view/admin.php");
                 die;
-                break;
+            break;
             default:
                 //Pantalla de error a lo mejor?
                 header("Location: ./index.php");
                 die;
-                break;
+            break;
         }
-}
+    }
        
 ?>

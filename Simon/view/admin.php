@@ -28,17 +28,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SIMÓN - Panel de control</title>
 </head>
 <body style="background-color:<?= $colorFondo ?>">
     <main>
-        <h1> Hola <?= $_SESSION['usuario'] ?>, bienvenido al panel de administración del Simón</h1>
+        <h1>Panel de administración</h1>
+        <p>Conectado como: <b><?php echo $_SESSION['usuario'] . " (Rol " . $_SESSION['rolUsuario'] . ")" ?></b>| <a href="../controller/logout.php">Cerrar sessión</a></p>
         <form method="POST" action="">
             Numero de botones: <input type="number" name="numBotones" value=<?= $numBotones ?> >
             <br>
             Numero de colores: <input type="number" name="numColores" value=<?= $numColores ?> >
-            <br>
-            <input type="submit">
+            <br><br>
+            <input type="submit" value="Guardar Configuración">
         </form>
         <span style="color.red"><?= $ErrMsg ?></span>
     </main>

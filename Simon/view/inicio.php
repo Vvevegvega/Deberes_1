@@ -32,11 +32,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SIMÓN</title>
 </head>
 <body style="background-color:<?= $colorFondo ?>">
     <main>
-        <h1> Hola <?= $_SESSION['usuario'] ?>, Simon dice...</h1>
+        <h1>SIMÓN</h1>
+        <h2> Hola <?= $_SESSION['usuario'] ?>, memorice la combinación.</h2>
         
         <?php //Aqui creamos el boton del form para empezar y pintamos la solucion a memorizar
             pintar_circulos($_SESSION['solucion']); 
@@ -46,7 +47,7 @@
             echo "<br>";
         ?>
         <br>
-        <form method=POST action=juego.php>
+        <form method=POST action=jugar.php>
             <input type=submit value=Empezar>
         </form>
         <form method="POST" action="">

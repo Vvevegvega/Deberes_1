@@ -31,20 +31,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simon - Inicio de sesion</title>
+    <title>SIMÓN - Inicio de sesion</title>
 </head>
 <body>
-    <h1><a href="./">Simon dice</a></h1>
+    <h1>SIMÓN</h1>
     <h2>Inicio de sesion</h2>
     <form method='POST' action=''>
         Nombre de usuario <input type='text' name="nombreUsuario" required>
         <br>
         Contraseña <input type='password' name="passUsuario" required>
         <br>
-        <input type='submit' value='Iniciar sesión'>
+        <input type='submit' value='Entrar'>
     </form>
     <span style="color:red"> <?= $_errMsg ?> <span>
     <br>
-    <a href="./view/registro.php">Crear una cuenta nueva</a>
+    <form method='POST' action="./view/registro.php">
+        <input type='submit' value='Registrarse'>
+    </form>
 </body>
 </html>
