@@ -1,6 +1,6 @@
 <?php
-    require './model/usuarioModel.php';
-    require './controller/seguridad.php';
+    require_once './model/usuarioModel.php';
+    require_once './controller/seguridad.php';
     
     $_errMsg = "";
 

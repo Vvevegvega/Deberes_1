@@ -1,5 +1,5 @@
   <?php
-  function open_conection(){
+  function open_conection(): PDO{
     $host = 'localhost';
     $dbname = 'dbsimon_ivan';
     $user = 'root';
@@ -21,6 +21,7 @@
     try {
         $pdo = new PDO($dsn, $user, $password, $opciones);
         echo "<script>console.log('Conexión establecida correctamente.');</script>";
+        return $pdo;
     } catch (PDOException $e) {
         // Registramos el detalle técnico en el log del servidor (oculto al visitante)
         error_log("Error de conexión PDO: " . $e->getMessage());

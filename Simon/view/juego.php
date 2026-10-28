@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require "../controller/pintar-circulos.php";
+    require_once "../controller/pintar-circulos.php";
 
     //Comprobaciones de la partida y la logica de pulsar botones y colorear
     if($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST['botonColor'])){

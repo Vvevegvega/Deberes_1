@@ -1,7 +1,7 @@
 <?php
     //TODO meter en base de datos la victoria o derrota
     session_start();
-    require "../controller/pintar-circulos.php";
+    require_once "../controller/pintar-circulos.php";
 
     $usuario = isset($_SESSION['usuario'])
         ?$_SESSION['usuario']

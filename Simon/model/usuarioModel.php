@@ -1,9 +1,8 @@
 <?php
-    require 'conexion.php'; // Obtenemos la conexión $pdo
+    require_once 'conexion.php'; // Obtenemos la conexión $pdo
     
     function buscar_usuario_por_username($userName){
-        open_conection();
-        global $pdo;
+        $pdo = open_conection();
         if(!empty(trim($userName))){
             try {
                 $sql = "SELECT Nombre, Clave, Rol
@@ -26,10 +25,8 @@
     }
 
     function insertar_nuevo_jugador($username, $passHash, $rol){
-        open_conection();
-        global $pdo;
+        $pdo = open_conection();
         try {
-            var_dump($pdo);
             $sql = "INSERT INTO usuarios (Nombre, Clave, Rol)
                     VALUES (:username, :passHash, :rol)";
             

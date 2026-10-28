@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require "../controller/pintar-circulos.php";
+    require_once "../controller/pintar-circulos.php";
 
     $colorFondo = isset($_COOKIE['colorFondo'])
         ? $_COOKIE['colorFondo']

@@ -1,49 +1,27 @@
 <?php
     session_start();
-
-    //Comprobaciones una vez se pulsa el boton
-    if($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST["numBotones"])){
-        //Añadir nombre de usuario a la sesion
-        if(!empty(trim($_POST['usuario']))){
-            $_SESSION['usuario'] = $_POST['usuario'];
-        }
-
-        //Miramos si hay algun color puesto y en caso de haber creamos cookie
-        if(isset($_POST['colorFondo'])){
-            setcookie( "colorFondo", $_POST['colorFondo'], [
-                    'expires' => time() + 300000,
-            ]);
-        }
-
-        //Ajustes de la partida metidas en sesion
-        if(($_POST["numBotones"] >= 4 && $_POST["numBotones"] <= 8) 
-            && $_POST["numColores"] >= 4 && $_POST["numColores"] <= 8){
-
-            $numColores = $_POST["numColores"];
-            $numBotones = $_POST["numBotones"];
-
-            $solucion = generar_colores($_POST["numBotones"],$_POST["numColores"]);
-            $_SESSION['solucion'] = $solucion;
-            $_SESSION['pulsaciones'] = 0;
-            $_SESSION['numColores'] = $numColores;
-            $_SESSION['jugada'] = generar_jugada_nueva($_POST["numBotones"]);
-        }
-    }
+    require_once "../controller/configController.php";
 
     //Zona de valores por defecto y leer valores de la cookie y de session
-    $numColores = 4;
     $ErrMsg = "";
+    $numColores = getNumColores();
+    $numBotones = getNumBotones();
 
     $colorFondo = isset($_COOKIE['colorFondo'])? $_COOKIE['colorFondo']
     : "lightgrey";
 
-    $usuario = isset($_SESSION['usuario'])
-    ? $_SESSION['usuario']
-    : "usuario";
-
-    $numCirculos = isset($_COOKIE['numCirculos'])
-    ? $_COOKIE['numCirculos']
-    : 4;
+    //Comprobaciones una vez se pulsa el boton
+    if($_SERVER["REQUEST_METHOD"] === 'POST' && isset($_POST["numBotones"])){
+        //Ajustes de la partida metidas en sesion
+        if(($_POST["numBotones"] >= 4 && $_POST["numBotones"] <= 8) 
+            && $_POST["numColores"] >= 4 && $_POST["numColores"] <= 8){
+            update_simon_config_controller($_POST['numBotones'], $_POST['numColores']);
+                $numColores = getNumColores();
+                $numBotones = getNumBotones();
+        }else{
+            $ErrMsg = "El numero de botones y colores debe estar comprendido entre 4 y 8";
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,11 +32,11 @@
 </head>
 <body style="background-color:<?= $colorFondo ?>">
     <main>
-        <h1> Hola <?= $usuario ?>, bienvenido al panel de administración del Simón</h1>
+        <h1> Hola <?= $_SESSION['usuario'] ?>, bienvenido al panel de administración del Simón</h1>
         <form method="POST" action="">
-            Numero de botones: <input type="number" name="numBotones" value = <?= $numCirculos ?> >
+            Numero de botones: <input type="number" name="numBotones" value=<?= $numBotones ?> >
             <br>
-            Numero de colores: <input type="number" name="numColores" value = <?= $numColores ?> >
+            Numero de colores: <input type="number" name="numColores" value=<?= $numColores ?> >
             <br>
             <input type="submit">
         </form>

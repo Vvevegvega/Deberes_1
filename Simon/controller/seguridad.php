@@ -1,11 +1,11 @@
 <?php
     function filtrar_acceso($es_admin_requerido = false){
         if(!isset($_SESSION['usuario'])){
-            header("Location: index.php");
+            header("Location: ./index.php");
             die;
         }
 
-        $rol = (int) $_SESSION['Rol'];
+        $rol = (int) $_SESSION['rolUsuario'];
 
         switch($rol){
             case 0: //Jugador
@@ -23,4 +23,5 @@
                 break;
         }
 }
+       
 ?>

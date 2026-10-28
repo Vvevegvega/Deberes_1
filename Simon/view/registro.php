@@ -1,5 +1,5 @@
 <?php
-    require '../model/usuarioModel.php';
+    require_once '../model/usuarioModel.php';
     $_errMsg = "";
 
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
