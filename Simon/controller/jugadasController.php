@@ -15,4 +15,9 @@
         return get_jugadas();
     }
 
+    function get_max_victorias_controller(){
+
+        return get_max_victorias()['Aciertos'];
+    }
+
 ?>
