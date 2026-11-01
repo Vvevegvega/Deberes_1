@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Animales asturianos</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <div id="contenedor">
+    <header>
+      <h1>Animales asturianos</h1>
+    </header>
+
+    <main>
+      <!-- GALLO -->
+      <article id="gallo">
+        <h2>Kiku negro (gallo negro)</h2>
+        <img src="img/gallo.jpg" alt="Gallo negro de cresta roja" class="oval">
+
+        <!-- AUDIO LOCAL: dos formatos para máxima compatibilidad -->
+        <audio controls preload="none">
+          <source src="audio/gallo.mp3" type="audio/mpeg">
+          <source src="audio/gallo.ogg" type="audio/ogg">
+          Tu navegador no soporta el elemento de audio.
+          <a href="audio/gallo.mp3">Descargar audio</a>
+        </audio>
+
+        <h3>Los gallos</h3>
+        <p class="autor">(Chicha Sánchez Ferlosio)</p>
+        <p>[Pega aquí el texto del poema de la plantilla, con sus &lt;br&gt; entre versos]</p>
+      </article>
+
+      <!-- CORZO -->
+      <article id="corzo">
+        <h2>El corzu (corzo)</h2>
+        <img src="img/corzo.jpg" alt="Corzo en el bosque" class="oval">
+
+        <!-- VÍDEO DE REPOSITORIO (YouTube): sustituye VIDEO_ID_CORZO -->
+        <div class="video">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_CORZO"
+                  title="Vídeo del corzo"
+                  loading="lazy"
+                  allow="accelerometer; encrypted-media; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+
+        <p>[Pega aquí el texto del corzo de la plantilla]</p>
+      </article>
+
+      <!-- OSO -->
+      <article id="oso">
+        <h2>L'osu pardu (el oso pardo)</h2>
+        <img src="img/oso.jpg" alt="Oso pardo" class="oval">
+
+        <!-- VÍDEO DE REPOSITORIO (YouTube): sustituye VIDEO_ID_OSO -->
+        <div class="video">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_OSO"
+                  title="Vídeo del oso pardo"
+                  loading="lazy"
+                  allow="accelerometer; encrypted-media; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+
+        <p>[Pega aquí el texto del oso de la plantilla]</p>
+      </article>
+    </main>
+
+    <footer>
+      <a href="#">css1</a> <a href="#">css2</a> <a href="#">css3</a> <a href="#">xhtml</a>
+    </footer>
+  </div>
+</body>
+</html>
