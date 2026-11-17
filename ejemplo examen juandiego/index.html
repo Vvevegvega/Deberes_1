@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/ControladorContenedores.js"></script>
+    <title>ContenedEx</title>
+</head>
+<body>
+    <h1>Contenedores</h1>
+    <form method="POST" action="">
+        <label for="">Referencia:</label>
+        <input type="text">
+
+        <label for="">Peso:</label>
+        <input type="text">
+
+        <label for="">Volumen:</label>
+        <input type="text">
+
+        <input type="button" value="Añadir" onclick="addContainer();">
+        <input type="button" value="Modificar" onclick="modifyContainer();">
+        <input type="button" value="Calcular" onclick="calcularDensidad();">
+
+        <br><br>
+        <input type="button" value="Mostrar contenedores de alta densidad" onclick="mostrarContenedoresAltaDensidad();">
+    </form>
+
+    <p id="response"></p>
+
+</body>
+</html>
