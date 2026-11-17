@@ -1,13 +1,16 @@
+import "Contenedor.js";
+import "ContenedorAltaDensidad.js";
+
 const containers = [];
 const containersAltaDensidad = [];
 
 function mostrarContenedoresAltaDensidad(){
     limpiarRespuesta();
-    
-    containersAltaDensidad.forEach(element => {
-        
+    let respuesta;
+    containersAltaDensidad.forEach(container => {
+        respuesta += (" - " + container.toString() + "\n");
     });
-    document.getElementById("response") = "";
+    document.getElementById("response") = respuesta;
 }
 
 function addContainer(){
@@ -22,11 +25,9 @@ function modifyContainer(){
 
 function calcularDensidad(){
     limpiarRespuesta();
-
-
+    //Get the values from the
     escribirRespuesta("hola");
 }
-
 
 function limpiarRespuesta(){
     document.getElementById("response").textContent="";
