@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./miTarjeta.js"></script>
+    <script>
+    const titulos = [
+        {
+            titulo: "Las cinco semillas de naranja",
+            subtitulo: "La entrega de una carta inofensiva seguida de la muerte.",
+        },
+        {
+            titulo: "Estudio en escarlata",
+            subtitulo: "El Dr. Watson conoce a Sherlock Holmes",
+        },
+        {
+            titulo: "El perro de Baskerville",
+            subtitulo: "Un perro misterioso aterroriza a una ciudad.",
+        },
+    ];
+    </script>
+    <template id="plantilla-tarjeta">
+        <p><span class="titulo"></span>: <span class="subtitulo"></span></p>
+    </template>
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="tarjeta-titulos"></div>
+    <script>
+        const fragmento = document.getElementById("plantilla-tarjeta");
+        titulos.forEach((t) => {
+            const instancia = document.importNode(fragmento.content, true);
+            instancia.querySelector(".titulo").textContent = t.titulo;
+            instancia.querySelector(".subtitulo").textContent = t.subtitulo;
+            document.getElementById("tarjeta-titulos").appendChild(instancia);
+        });
+    </script>
+
+</body>
+</html>

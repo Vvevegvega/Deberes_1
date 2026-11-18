@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen Iván Vega García</title>
+</head>
+<body>
+    <h1>Contenedores</h1>
+
+    <div>
+        <label for="txt_referencia">Referencia</label>
+        <input type="text" id="txt_referencia">
+
+        <label for="number_peso">Peso</label>
+        <input type="number" min="10" id="number_peso">
+
+        <label for="number_volumen">Volumen</label>
+        <input type="number" min="10" id="number_volumen">
+
+        <button id="btn_add">Añadir</button>
+        <button id="btn_modify">Modificar</button>
+        <button id="btn_calculate">Calcular</button>
+    </div>
+    <div>
+        <button id="btn_mostrar_alta_densidad">
+            Mostrar contenedores de alta densidad
+        </button>
+    </div>
+    <div id="msg_div"></div>
+    <script src="logicaExamen.js"></script>
+</body>
+</html>
