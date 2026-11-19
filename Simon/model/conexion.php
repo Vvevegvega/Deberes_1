@@ -1,4 +1,5 @@
 <?php
+
   function open_conection(): PDO{
     $host = 'localhost';
     $dbname = 'dbsimon_ivan';

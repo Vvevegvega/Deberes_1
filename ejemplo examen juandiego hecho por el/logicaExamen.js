@@ -22,8 +22,7 @@ class Contenedor{
     }
 
     set Volumen(value){
-        
-        this.#volumen = value;
+        this.#volumen = parseFloat(value);
     }
 
     get Peso(){
@@ -31,8 +30,7 @@ class Contenedor{
     }
 
     set Peso(value){
-        if(value < 10) throw new Error("El peso introducido no es válido");
-        this.#peso = value;
+        this.#peso = parseInt(value);
     }
 }
 
@@ -59,8 +57,7 @@ class ContenedorAltaDensidad{
     }
 
     set Densidad(value){
-        
-        this.#densidad = value;
+        this.#densidad = parseFloat(value);
     }
 }
 
@@ -73,42 +70,88 @@ const numberPeso = document.getElementById("number_peso");
 const numberVolumen = document.getElementById("number_volumen");
 const msgDiv = document.getElementById("msg_div");
 
+//Hacen falta todos los campos
 const btnAdd = document.getElementById("btn_add");
 btnAdd.addEventListener("click",
-    () => { //TODO validacion
-        if(exists_reference(txtRef.value)) throw new Error("El contenedor ya existe en la base de datos");
+    () => {
+        if(exists_reference(txtRef.value)){
+            msgDiv.innerText=`El contenedor especificado ya existe en la base de datos`;
+        }else{
+            
+            let peso = parseFloat(numberPeso.value);
+            let volumen = parseFloat(numberVolumen.value);
 
-        Contenedores.push(new Contenedor(txtRef.value, numberPeso.value, numberVolumen.value));
-        if(numberPeso.value / numberVolumen.value >= 2.5){
-            ContenedoresAltaDensidad.push(
-                new ContenedorAltaDensidad (
-                    txtRef.value, 
-                    parseInt(numberPeso.value)/parseFloat(numberVolumen.value)
-                ));
-            msgDiv.innerHTML = `Se ha añadido el contenedor ${txtRef.value} a las listas de contenedores y de contenedores de alta densidad`;
-        }else {
-            msgDiv.innerHTML = `Se ha añadido el contenedor ${txtRef.value} a la lista de contenedores`;
+            Contenedores.push(new Contenedor(txtRef.value, peso, volumen));
+            if(peso / volumen >= 2.5){
+                ContenedoresAltaDensidad.push(
+                    new ContenedorAltaDensidad (
+                        txtRef.value, 
+                        peso/volumen
+                    ));
+                msgDiv.innerHTML = `Se ha añadido el contenedor ${txtRef.value} a las listas de contenedores y de contenedores de alta densidad`;
+            }else {
+                msgDiv.innerHTML = `Se ha añadido el contenedor ${txtRef.value} a la lista de contenedores`;
+            }
+
+            console.log(Contenedores);
+            console.log(ContenedoresAltaDensidad);
         }
+
     }
 );
 
+//Hacen falta todos los parametros
 const btnModify = document.getElementById("btn_modify");
 btnModify.addEventListener("click",
     () => {
-        //OJO find!!
-        const containerMod = Contenedores.find(
+        //Pillamos el contenedor
+        const contenedorMod = Contenedores.find(
             (c) => c.Referencia === txtRef.value
         );
         if(contenedorMod !== undefined){
-            
-           contenedor()
+            //Cambiar los valores
+            let peso = parseInt(numberPeso.value);
+            let volumen = parseFloat(numberVolumen.value);
 
+            contenedorMod.Peso= peso;
+            contenedorMod.Volumen = volumen;
+
+            //Buscar si esta en la lista de los de alta densidad, repetir
+            const contenedorAltaDensidadMod = ContenedoresAltaDensidad.find(
+                (c) => c.Referencia === txtRef.value
+            );
+             //El contenedor esta en la lista de alta densidad
+            if(contenedorAltaDensidadMod !== undefined){
+                // se sale de la lista de densidad
+                if(peso/volumen < 2.5){ 
+                    ContenedoresAltaDensidad
+                    .splice(ContenedoresAltaDensidad
+                    .findIndex( (c) => { c.Referencia === contenedorAltaDensidadMod.Reference}),1);
+
+                // Se queda en la lista de densidad
+                }else{ 
+                    contenedorAltaDensidadMod.Densidad=peso/volumen;
+                }
+            // El contenedor no esta en la lista de alta densidad
+            }else{
+                // Se mete en la lista de alta densidad
+                if(peso/volumen >= 2.5){ 
+                    ContenedoresAltaDensidad.push(
+                        new ContenedorAltaDensidad (
+                        txtRef.value, 
+                        peso/volumen
+                    ));
+                }
+            }
+            
+            msgDiv.innerText=`El contenedor con id: ${contenedorMod.Referencia} ha sodo modificado correctamente`;
         }else{
             msgDiv.innerText=`El contenedor especificado no existe en la base de datos ${txtRef.value}`;
         }
     }
 );
 
+//Hacen falta peso y volumen
 const btnCalculate = document.getElementById("btn_calculate");
 btnCalculate.addEventListener("click",
     () => {
@@ -130,17 +173,48 @@ btnCalculate.addEventListener("click",
     }
 );
 
+//No hace falta nada
 const btnMostrarAltaDensidad = document.getElementById("btn_mostrar_alta_densidad");
 btnMostrarAltaDensidad.addEventListener("click",
     () => {
-        
+        if(ContenedoresAltaDensidad.length == 0){
+            msgDiv.innerText=`No hay registros de contenedores de alta densidad en la base de datos`;
+        }else{
+            let contendores_toString = 
+                `<h2>Listado de contenedores de alta capacidad:</h2>
+                <table border=1>
+                    <tr><th>Referencia</th>
+                        <th>Peso</th>
+                        <th>Volumen</th>
+                        <th>Densidad</th>
+                    </tr>`;
+            ContenedoresAltaDensidad.forEach( contenedor => {
+                let contenedorInfo = Contenedores.find(
+                    (c) => c.Referencia === contenedor.Referencia
+                );
+
+                contendores_toString += 
+                `<tr>
+                    <td>${contenedorInfo.Referencia}</td>
+                    <td>${contenedorInfo.Peso.toFixed(2)}Kg</td>
+                    <td>${contenedorInfo.Volumen.toFixed(2)}m3</td>
+                    <td>${contenedor.Densidad.toFixed(2)}Kg/m3</td>
+                </tr>`;
+            });
+            contendores_toString += `</table>`;
+            msgDiv.innerHTML= contendores_toString;
+        }
+
     }
 );
 
 function exists_reference(reference){
-    Contenedores.forEach(container => {
-        if(container.Referencia == reference)
-            return true;
-    });
-    return false;
+    const contenedorMod = Contenedores.find(
+            (c) => c.Referencia === reference
+        );
+        if(contenedorMod !== undefined){
+           return true;
+        }else{
+            return false;
+        }
 }
