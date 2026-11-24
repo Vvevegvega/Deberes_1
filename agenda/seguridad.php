@@ -1,27 +1,26 @@
 <?php
-    function filtrar_acceso($es_admin_requerido = false){
+    function chk_acceso_inicio_agenda(){
+        chck_usuario_logeado();
+
+        if((int) $_SESSION['rolUsuario'] === 1){
+            header("Location: ./admin.php");
+            die;
+        }
+    }
+
+    function chk_acceso_panel_config(){
+        chck_usuario_logeado();
+
+        if((int) $_SESSION['rolUsuario'] === 0){
+            header("Location: ./inicio.php");
+            die;
+        }
+    }
+
+    function chck_usuario_logeado(){
         if(!isset($_SESSION['usuario'])){
             header("Location: ./index.php");
             die;
         }
-
-        $rol = (int) $_SESSION['rolUsuario'];
-
-        switch($rol){
-            case 0: //Jugador
-                header("Location: ./view/inicio.php");
-                die;
-            break;
-            case 1: //Admin
-                header("Location: ./view/admin.php");
-                die;
-            break;
-            default:
-                //Pantalla de error a lo mejor?
-                header("Location: ./index.php");
-                die;
-            break;
-        }
     }
-       
 ?>

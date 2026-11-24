@@ -1,0 +1,16 @@
+Mirar la table canfiguracion para meterla valores iniciales
+Agenda.php      entera
+    Una serie de formularios dinamicos por cada ususario para modificar o grabar uno nuevo
+
+inicio.php      entera
+    Una chorrada, emojis por cada contacto y botones de incrtementar y grabar
+
+funciones.php   entero
+    logica con funciones, nada de html
+
+grabado.php     entero
+    añadir cosas a la base de datos se hace aqui pero con una transaccion 
+    no me ha quedado claro, 
+
+totales.php     entero
+    Tabla grafica como la del simon

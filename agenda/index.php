@@ -1,30 +1,39 @@
 <?php
-    require_once './conexion';
-    require_once './modelo';
+    require_once './conexion.php';
+    require_once './modelo.php';
+
+    $_errMsg = "";
 
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
-        if(isset($_POST) && isset($_POST['nombreUsuario'])){
+        if(isset($_POST) && isset($_POST['nombre_usuario'])){
             //Check si ya existen en la base de datos
-            $usuario = buscar_usuario_por_username($_POST['nombreUsuario']);
+            $usuario = buscar_usuario_por_username($_POST['nombre_usuario']);
 
             if($usuario !==  false 
-            && $usuario['Nombre'] === $_POST['nombreUsuario']
-            && password_verify($_POST['passUsuario'], $usuario['Clave'])){
+            && $usuario['nombre'] === $_POST['nombre_usuario']
+            && password_verify($_POST['pass_usuario'], $usuario['clave'])){
                 
                 //Meter los valores correspondientes en sesion
                 session_start();
-                $_SESSION['usuario'] = $usuario['Nombre'];
-                $_SESSION['rolUsuario'] = $usuario['Rol'];
+                session_regenerate_id(true);
+                $_SESSION['usuario'] = $usuario['nombre'];
+                $_SESSION['rolUsuario'] = $usuario['rol'];
 
                 //Encaminar a la pantalla correspondiente
-                filtrar_acceso();
+                if($usuario['rol'] === 1){
+                    header("./admin.php");
+                    die;
+                }else{
+                    header("./inicio.php");
+                    die;
+                }
             }else{
                 $_errMsg = "Credenciales incorrectas";
             }  
         }
     }
 ?>
-?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -34,15 +43,18 @@
 </head>
 <body>
     <h1>Agenda de contactos</h1>
+    <h2>Inicio de sesión</h2>
     <form method='POST' action=''>
-        Usuario
-        <input type="text" id="txt_usuario">
+        Usuario <input type="text" name="nombre_usuario" required>
         <br>
-        Clave
-        <input type="text" id="txt_clave">
-        <br><br>
+        Clave <input type='password' name="pass_usuario" required>
+        <br>
         <input type='submit' value='Entrar'>
+    </form>
+    <br>
+    <form method='POST' action='./registro.php'>
         <input type='submit' value='Registrarse'>
     </form>
+    <span style="color:red"> <?= $_errMsg ?> <span>
 </body>
 </html>
