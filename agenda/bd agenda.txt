@@ -1,0 +1,47 @@
+DROP DATABASE agenda_usuarios;
+CREATE DATABASE agenda_usuarios;
+CREATE TABLE usuarios(
+    codigo INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(20) UNIQUE NOT NULL,
+    clave VARCHAR(255) NOT NULL,
+    rol TINYINT NOT NULL,
+    CONSTRAINT pkUsuarios PRIMARY KEY(codigo),
+    CONSTRAINT chkNombre CHECK(nombre<>''),
+    CONSTRAINT chkClave CHECK(clave<>''),
+    CONSTRAINT chkRol CHECK(rol IN (0,1))
+);
+
+CREATE TABLE configuracion(
+    id TINYINT NOT NULL,
+    max_lote INT NOT NULL,
+    num_emojis INT NOT NULL,
+    max_contactos INT NOT NULL,
+    CONSTRAINT pkConfiguracion PRIMARY KEY(id),
+    CONSTRAINT chkId CHECK(id=1),
+    CONSTRAINT chkMaxLote CHECK(max_lote BETWEEN 3 AND 8),
+    CONSTRAINT chkNumEmojis CHECK(num_emojis BETWEEN 4 AND 10),
+    CONSTRAINT chkMaxContactos CHECK(max_contactos BETWEEN 10 AND 100)
+);
+
+CREATE TABLE contactos(
+    id INT NOT NULL AUTO_INCREMENT,
+    codigousu INT NOT NULL,
+    nombre VARCHAR(30) NOT NULL,
+    apellidos VARCHAR(50) NOT NULL,
+    telefono CHAR(9) NOT NULL,
+    email VARCHAR(80) NOT NULL,
+    emoji VARCHAR(8) NOT NULL,
+    fecha DATETIME NOT NULL,
+    CONSTRAINT pkContactos PRIMARY KEY(id),
+    CONSTRAINT fkContactosUsuarios FOREIGN KEY(codigousu) REFERENCES usuarios(codigo),
+    CONSTRAINT chkNombreContacto CHECK(nombre<>''),
+    CONSTRAINT chkApellidos CHECK(apellidos<>''),
+    CONSTRAINT chkTelefono CHECK(telefono<>''),
+    CONSTRAINT chkEmail CHECK(email<>''),
+    CONSTRAINT chkEmoji CHECK(emoji<>'')
+);
+
+INSERT INTO usuarios(nombre, clave, rol) VALUES
+('admin', "$2y$10$gUOFO1BpTz6YCSGsFgq2euoXytsEVnxpH9tG3se4XtYIeXgg6q51a", 1),
+('usuario1', "$2y$10$ayXjAs7Adq8rsZyunMLAt.Q4NaW6fH0aDpWI6SWalfH.UonG6diN.", 0),
+('usuario2', "$2y$10$CdtcZHvdwlq21YFuhb8nk.jacjOjKnE92JSawPaLk2c6krxYiS2Pe", 0);
