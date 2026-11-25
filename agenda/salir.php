@@ -1,6 +1,7 @@
 <?php
     //Sacado directamente del manual de php para
     //destruir una sesion del todo:
+    session_start();
 
     // Unset all of the session variables.
     $_SESSION = array();
@@ -17,4 +18,4 @@
 
     // Finally, destroy the session.
     session_destroy();
-    header("./index.php");
+    header("Location: ./index.php");

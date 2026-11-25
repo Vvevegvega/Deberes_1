@@ -45,3 +45,14 @@ INSERT INTO usuarios(nombre, clave, rol) VALUES
 ('admin', "$2y$10$gUOFO1BpTz6YCSGsFgq2euoXytsEVnxpH9tG3se4XtYIeXgg6q51a", 1),
 ('usuario1', "$2y$10$ayXjAs7Adq8rsZyunMLAt.Q4NaW6fH0aDpWI6SWalfH.UonG6diN.", 0),
 ('usuario2', "$2y$10$CdtcZHvdwlq21YFuhb8nk.jacjOjKnE92JSawPaLk2c6krxYiS2Pe", 0);
+
+INSERT INTO configuracion(id, max_lote, num_emojis, max_contactos) VALUES
+(1, 5, 10, 50);
+
+INSERT INTO contactos(codigousu, nombre, apellidos, telefono, email, emoji, fecha) VALUES
+(2, 'Laura',  'García Pérez',    '612345678', 'laura.garcia@mail.com',    '👽', '2026-11-01 10:15:00'),
+(2, 'Carlos', 'Martínez López',  '623456789', 'carlos.martinez@mail.com', '🤖', '2026-11-05 18:30:00'),
+(2, 'Ana',    'Fernández Ruiz',  '634567890', 'ana.fernandez@mail.com',   '😾', '2026-11-12 09:45:00'),
+(2, 'Pablo',  'Sánchez Gómez',   '645678901', 'pablo.sanchez@mail.com',   '🧙‍♂️', '2026-11-20 20:10:00'),
+(3, 'María',  'Rodríguez Díaz',  '656789012', 'maria.rodriguez@mail.com', '🌈', '2026-11-03 12:00:00'),
+(3, 'Jorge',  'Álvarez Torres',  '667890123', 'jorge.alvarez@mail.com',   '😆', '2026-11-18 16:25:00');

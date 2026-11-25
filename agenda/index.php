@@ -1,7 +1,5 @@
 <?php
-    require_once './conexion.php';
     require_once './modelo.php';
-
     $_errMsg = "";
 
     if($_SERVER["REQUEST_METHOD"] === 'POST'){
@@ -21,12 +19,13 @@
 
                 //Encaminar a la pantalla correspondiente
                 if($usuario['rol'] === 1){
-                    header("./admin.php");
+                    header("Location: ./admin.php");
                     die;
                 }else{
-                    header("./inicio.php");
+                    header("Location: ./inicio.php");
                     die;
                 }
+
             }else{
                 $_errMsg = "Credenciales incorrectas";
             }  
