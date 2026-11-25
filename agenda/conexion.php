@@ -6,12 +6,12 @@
     $user = 'root';
     $password = "";
 
-    // 1. Cadena DSN (Data Source Name)
-      //$dsn = "mysql:host=$host;port=3307;dbname=$dbname;charset=utf8mb4";
+    // 1. Cadena DSN (Data Source Name) para clase con el port  3307
+      $dsn = "mysql:host=$host;port=3307;dbname=$dbname;charset=utf8mb4";
       
       // En mi casa intente cambiar el puerto del mysql al 3307 como en clase pero no consegui
       // Hacer que me funcionara, asi que cambiare la dsn a mano como workaround
-      $dsn = "mysql:host=$host;port=3306;dbname=$dbname;charset=utf8mb4";
+      //$dsn = "mysql:host=$host;port=3306;dbname=$dbname;charset=utf8mb4";
 
     // 2. Opciones de configuración
     $opciones = [
